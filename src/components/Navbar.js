@@ -51,7 +51,7 @@ const Navbar = () => {
     return (
         <main className="h-16 w-full flex items-center justify-between px-10 bg-[--primary-blue] rounded-b-2xl">
             <h2 className="uppercase font-bold text-lg font-serif text-white">Alpaago</h2>
-            <ul className="flex space-x-20 text-white">
+            <ul className="flex space-x-10 lg:space-x-20 text-white">
                 {
                     navLinks.map((link) => {
                         return <li key={link.id}>
@@ -63,21 +63,18 @@ const Navbar = () => {
             </ul>
 
             <div>
-                {loading ?
-                    <p className="px-3 text-sm cursor-pointer border bg-white text-[--primary-blue] rounded-md hover:text-sm font-semibold">
-                        Loading...
-                    </p> : !user ? (
-                        <button type='button' onClick={handleSignIn} className="px-5 text-sm cursor-pointer border bg-white text-[--primary-blue] rounded hover:text-sm font-semibold">
-                            Login
+                {!user ? (
+                    <button type='button' onClick={handleSignIn} className="px-5 text-sm cursor-pointer border bg-white text-[--primary-blue] rounded hover:text-sm font-semibold">
+                        Login
+                    </button>
+                ) : (
+                    <div className="flex items-center">
+                        <p className="text-white hidden lg:block">Welcome, {user.displayName}</p>
+                        <button type="button" onClick={handleSignOut} className="lg:ml-7 px-5 text-sm cursor-pointer border bg-white text-[--primary-blue] rounded-md font-semibold">
+                            Logout
                         </button>
-                    ) : (
-                        <div className="flex items-center">
-                            <p className="text-white ">Welcome, {user.displayName}</p>
-                            <button type="button" onClick={handleSignOut} className="ml-7 px-5 text-sm cursor-pointer border bg-white text-[--primary-blue] rounded-md font-semibold">
-                                Logout
-                            </button>
-                        </div>
-                    )}
+                    </div>
+                )}
             </div>
         </main>
     );
